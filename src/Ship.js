@@ -1,28 +1,52 @@
 const Ship = (length) => {
-     let hitWhere = []
-     
-     hitWhere.length = length
+     const body = []
+     const location = []
+     let horizontal = false
+
+     body.length = length
      for(let i = 0; i < length; i++){
-          hitWhere[i] = false
+          body[i] = false
+     }
+     
+     function setHorizontal(){
+          horizontal = true
+     }
+
+     function setVertical(){
+          horizontal = false
+     }
+
+     function isHorizontal(){
+          return horizontal
      }
 
      function hit(num){
-          console.log('Hitting the ship on ' + num)
-          hitWhere[num] = true
-          console.log('Hit here: ' + num + hitWhere[num])
+          body[num] = true
      }
 
      function isSunk(){
-          return length === hitWhere.length
+          return !(body.includes(false))
+     }
+
+     function getLocation() {
+          return location
+     }
+
+     function setLocation(locationArray) {
+          locationArray.map((index) => location.push(index))
      }
 
      return{
           length: length,
-          hitWhere: hitWhere,
-          sunk: false,
+          body: body,
           hit,
-          isSunk
+          isSunk,
+          setVertical,
+          setHorizontal,
+          isHorizontal,
+          getLocation,
+          setLocation
      }
 }
 
-module.exports = Ship
+export default Ship
